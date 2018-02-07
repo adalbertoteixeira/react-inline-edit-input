@@ -1,0 +1,36 @@
+.inline-edit {
+  text-decoration: underline dotted;
+  cursor: pointer;
+}
+
+.inline-edit .input-wrapper {
+  position: relative;
+}
+
+.inline-edit .input-wrapper input {
+  width: 100%;
+  margin: 0;
+  padding: .5rem;
+}
+
+.inline-edit .input-wrapper .actions {
+  position: absolute;
+  width: 100%;
+  display: flex;
+}
+
+.inline-edit .input-wrapper .actions button {
+  flex: 0 0 50%;
+  border: none;
+  padding: .5rem;
+  color: white;
+  text-transform: uppercase;
+}
+
+.inline-edit .input-wrapper .actions button.save {
+  background-color: blue;
+}
+
+.inline-edit .input-wrapper .actions button.cancel {
+  background-color: red;
+}

@@ -1,0 +1,58 @@
+{
+  "name": "react-inline-edit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist/ &&  mkdir dist/ && ./node_modules/.bin/babel --no-comments --compact true --minified --source-maps map src/index.jsx --out-file dist/index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adalbertoteixeira/react-inline-edit"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "src",
+    "es"
+  ],
+  "keywords": [
+    "react",
+    "reactjs"
+  ],
+  "author": "Adalberto Teixeira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adalbertoteixeira/react-inline-edit/issues"
+  },
+  "homepage": "https://github.com/adalbertoteixeira/react-inline-edit",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^22.1.0",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.16.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-plugin-react": "^7.6.1",
+    "jest": "^22.1.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  },
+  "peerDependencies": {},
+  "jest": {
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.jsx?",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/*.{js,jsx}"
+    ]
+  }
+}

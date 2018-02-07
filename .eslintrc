@@ -1,0 +1,22 @@
+{
+  "extends": ["eslint:recommended", "google", "plugin:react/recommended"],
+  "parserOptions": {
+     "ecmaVersion": 8,
+     "sourceType": "module",
+     "ecmaFeatures": {
+       "jsx": true,
+       "spread": true,
+       "arrowFunctions": true,
+       "experimentalObjectRestSpread": true
+    }
+ },
+ "rules": {
+    "semi": 2,
+    "object-curly-spacing": ["error", "always"]
+  },
+  "env": {
+    "es6": true,
+    "amd": true,
+    "browser": true
+  }
+}

@@ -69,6 +69,7 @@ test('InlineEdit should change input values on type', () => {
     <InlineEdit
       value="placeholder"
       tag="p"
+      type="input"
     />
   );
 

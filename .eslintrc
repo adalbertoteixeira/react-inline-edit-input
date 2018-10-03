@@ -18,5 +18,9 @@
     "es6": true,
     "amd": true,
     "browser": true
+  },
+  "globals": {
+    "test": true,
+    "expect": true
   }
 }

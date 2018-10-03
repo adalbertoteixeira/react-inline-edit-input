@@ -52,20 +52,19 @@ class InlineEdit extends PureComponent {
     this.save = this.save.bind(this);
     this.change = this.change.bind(this);
     this.input = React.createRef();
-    this.focusInput = this.focusInput.bind(this);
   }
 
   /**
    * @param  {object} nextProps Props sent by the parent component.
    * @return {void}
    */
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate() {
     if (!this.props.updateOnNewProps) {
       return;
     }
 
     this.setState({
-      value: nextProps.value,
+      value: this.props.value,
     });
   }
 
@@ -76,7 +75,7 @@ class InlineEdit extends PureComponent {
    */
   toggleMode(edit) {
     this.setState({ edit }, () => {
-      if (edit) {
+      if (edit && this.input.current) {
         this.input.current.focus();
       }
     });
@@ -116,7 +115,7 @@ class InlineEdit extends PureComponent {
    */
   render() {
     const Tag = this.props.tag;
-    const Input = this.props.type ? this.props.type : 'textarea';
+    const Input = this.props.type === 'textarea' ? 'textarea' : 'input';
 
 
     return (

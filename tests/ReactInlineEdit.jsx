@@ -1,9 +1,9 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16'; 
+import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { mount } from 'enzyme';
 import InlineEdit from '../src/index';
 
-Enzyme.configure({ adapter: new Adapter() })
+Enzyme.configure({ adapter: new Adapter() });
 
 const tagCSS = '.inline-edit .tag-wrapper';
 const inputCSS = '.inline-edit .input-wrapper';
@@ -52,7 +52,6 @@ test('InlineEdit should change to input on click', () => {
   expect(wrapper.prop('onSave')).toBe(null);
   expect(wrapper.prop('updateOnNewProps')).toBe(false);
 
-  
   let value = wrapper.find(tagCSS);
   let input = wrapper.find(inputCSS);
   expect(value.text()).toEqual('placeholder');
@@ -72,11 +71,11 @@ test('InlineEdit should change input values on type', () => {
       tag="p"
     />
   );
-  
+
   expect(wrapper.state().value).toEqual('placeholder');
   const value = wrapper.find(tagCSS);
   value.simulate('click');
-  
+
   const input = wrapper.find(`${inputCSS} input`);
   input.simulate('change', { target: { value: 'newvalue' } });
   expect(wrapper.state().value).toEqual('newvalue');
@@ -89,11 +88,11 @@ test('InlineEdit should close and revert values on cancel', () => {
       tag="p"
     />
   );
-  
+
   expect(wrapper.state().value).toEqual('placeholder');
   const value = wrapper.find(tagCSS);
   value.simulate('click');
-  
+
   const input = wrapper.find(`${inputCSS} input`);
   input.simulate('change', { target: { value: 'newvalue' } });
   expect(wrapper.state().value).toEqual('newvalue');
@@ -112,11 +111,11 @@ test('InlineEdit should close and trigger callback on save', () => {
       onSave={onSave}
     />
   );
-  
+
   expect(wrapper.state().value).toEqual('placeholder');
   const value = wrapper.find(tagCSS);
   value.simulate('click');
-  
+
   const input = wrapper.find(`${inputCSS} input`);
   input.simulate('change', { target: { value: 'newvalue' } });
   expect(wrapper.state().value).toEqual('newvalue');

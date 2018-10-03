@@ -14,7 +14,7 @@
 ```
 ## Properties
 
-| name | type | default | description |
-| ---- | ---- | ------- | ----------- |
+| Name | Type | Default | Description |
+| :--- | :--- | :------ | :---------- |
 | updateOnNewProps | boolean | false | Props will only be updated if this is set to true |
 

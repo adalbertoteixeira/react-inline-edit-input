@@ -51,6 +51,8 @@ class InlineEdit extends PureComponent {
     this.cancel = this.cancel.bind(this);
     this.save = this.save.bind(this);
     this.change = this.change.bind(this);
+    this.input = React.createRef();
+    this.focusInput = this.focusInput.bind(this);
   }
 
   /**
@@ -73,7 +75,11 @@ class InlineEdit extends PureComponent {
    * @return {void}
    */
   toggleMode(edit) {
-    this.setState({ edit });
+    this.setState({ edit }, () => {
+      if (edit) {
+        this.input.current.focus();
+      }
+    });
   }
 
   /**
@@ -110,7 +116,7 @@ class InlineEdit extends PureComponent {
    */
   render() {
     const Tag = this.props.tag;
-    const Input = this.props.type ? 'textarea' : this.props.type;
+    const Input = this.props.type ? this.props.type : 'textarea';
 
 
     return (
@@ -143,6 +149,7 @@ class InlineEdit extends PureComponent {
             </div>
           </div> :
           <Tag
+            ref={this.input}
             className="tag-wrapper"
             onClick={() => this.toggleMode(true)}
           >

@@ -1,0 +1,9 @@
+src/
+node_modules/
+.git/
+coverage/
+tests/
+.babelrc
+.eslintrc
+package.json
+package.lock.json

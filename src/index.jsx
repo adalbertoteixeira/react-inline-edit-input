@@ -43,7 +43,7 @@ class InlineEdit extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value,
+      value: props.format ? props.format(props.value) : props.value,
       edit: false,
     };
 
@@ -55,16 +55,35 @@ class InlineEdit extends PureComponent {
   }
 
   /**
+   * @param  {any} value passed in.
+   * @param  {function} format Function used to format value.
+   * @return {any} initial value or formated value
+   */
+  getValue(value, format) {
+    if (!format) {
+      return value;
+    }
+
+    return format(value);
+  }
+
+  /**
    * @param  {object} nextProps Props sent by the parent component.
    * @return {void}
    */
   componentDidUpdate() {
-    if (!this.props.updateOnNewProps) {
+    const {
+      updateOnNewProps,
+      value,
+      format,
+    } = this.props;
+
+    if (!updateOnNewProps) {
       return;
     }
 
     this.setState({
-      value: this.props.value,
+      value: this.getValue(value, format),
     });
   }
 
@@ -105,8 +124,13 @@ class InlineEdit extends PureComponent {
    * @return {void}
    */
   change(ev) {
+    const {
+      format,
+      getValue,
+    } = this.props;
+
     this.setState({
-      value: ev.target.value,
+      value: getValue(ev.target.value, format),
     });
   }
 
@@ -114,9 +138,13 @@ class InlineEdit extends PureComponent {
    * @return {void}
    */
   render() {
-    const Tag = this.props.tag;
-    const Input = this.props.type === 'textarea' ? 'textarea' : 'input';
+    const {
+      tag,
+      type,
+    } = this.props;
 
+    const Tag = tag;
+    const Input = type === 'textarea' ? 'textarea' : 'input';
 
     return (
       <div className="inline-edit" style={styles.inlineEdit}>
@@ -162,6 +190,7 @@ class InlineEdit extends PureComponent {
 
 InlineEdit.propTypes = {
   value: oneOfType([string, number]),
+  format: func,
   tag: string,
   type: string,
   onSave: func,
@@ -170,10 +199,12 @@ InlineEdit.propTypes = {
   saveLabel: string,
   cancelColor: string,
   cancelLabel: string,
+  getValue: func,
 };
 
 InlineEdit.defaultProps = {
   value: '',
+  format: null,
   tag: 'span',
   type: 'text',
   onSave: null,
@@ -182,6 +213,7 @@ InlineEdit.defaultProps = {
   saveLabel: 'Save',
   cancelColor: 'red',
   cancelLabel: 'Cancel',
+  getValue: null,
 };
 
 export default InlineEdit;

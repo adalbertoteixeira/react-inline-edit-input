@@ -31,6 +31,36 @@ const styles={
   },
 };
 
+const getValueByType = (value, type) => {
+  if (type === 'number') {
+    try {
+      const number = Number(value);
+      if (Number.isNaN(number)) {
+        return null;
+      }
+
+      return number;
+    } catch (e) {
+      return value;
+    }
+  }
+
+  return value;
+};
+
+/**
+ * @param  {any} value passed in.
+ * @param  {function} format Function used to format value.
+ * @return {any} initial value or formated value
+ */
+const getFormatedValue = (value, format) => {
+  if (!format) {
+    return value;
+  }
+
+  return format(value);
+};
+
 /**
  * InlineEdit component
  */
@@ -42,8 +72,14 @@ class InlineEdit extends PureComponent {
    */
   constructor(props) {
     super(props);
+    const {
+      value,
+      type,
+    } = this.props;
+    const valueToUse = getValueByType(value, type);
+
     this.state = {
-      value: props.format ? props.format(props.value) : props.value,
+      value: valueToUse,
       edit: false,
     };
 
@@ -55,19 +91,6 @@ class InlineEdit extends PureComponent {
   }
 
   /**
-   * @param  {any} value passed in.
-   * @param  {function} format Function used to format value.
-   * @return {any} initial value or formated value
-   */
-  getValue(value, format) {
-    if (!format) {
-      return value;
-    }
-
-    return format(value);
-  }
-
-  /**
    * @param  {object} nextProps Props sent by the parent component.
    * @return {void}
    */
@@ -75,15 +98,22 @@ class InlineEdit extends PureComponent {
     const {
       updateOnNewProps,
       value,
-      format,
     } = this.props;
+
+    const {
+      edit,
+    } = this.state;
 
     if (!updateOnNewProps) {
       return;
     }
 
+    if (edit) {
+      return;
+    }
+
     this.setState({
-      value: this.getValue(value, format),
+      value: value,
     });
   }
 
@@ -125,12 +155,10 @@ class InlineEdit extends PureComponent {
    */
   change(ev) {
     const {
-      format,
-      getValue,
+      type,
     } = this.props;
-
     this.setState({
-      value: getValue(ev.target.value, format),
+      value: getValueByType(ev.target.value, type),
     });
   }
 
@@ -141,7 +169,12 @@ class InlineEdit extends PureComponent {
     const {
       tag,
       type,
+      format,
     } = this.props;
+
+    const {
+      value,
+    } = this.state;
 
     const Tag = tag;
     const Input = type === 'textarea' ? 'textarea' : 'input';
@@ -180,7 +213,9 @@ class InlineEdit extends PureComponent {
             className="tag-wrapper"
             onClick={() => this.toggleMode(true)}
           >
-            {this.state.value}
+            {
+              getFormatedValue(value, format)
+            }
           </Tag>
         }
       </div>

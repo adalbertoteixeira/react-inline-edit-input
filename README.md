@@ -17,4 +17,5 @@
 | Name | Type | Default | Description |
 | :--- | :--- | :------ | :---------- |
 | updateOnNewProps | boolean | false | Props will only be updated if this is set to true |
+| format | function | null | Formats the value according to the function supplied |
 

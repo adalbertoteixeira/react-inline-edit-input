@@ -143,7 +143,7 @@ class InlineEdit extends PureComponent {
   toggleMode(edit) {
     this.setState({ edit }, () => {
      if (edit && this.inputRef && this.inputRef.current) {
-        this.input.current.focus();
+        this.inputRef.current.focus();
       }
     });
   }
@@ -229,7 +229,6 @@ class InlineEdit extends PureComponent {
             </div>
           </div> :
           <Tag
-            ref={this.input}
             className="tag-wrapper"
             onClick={() => this.toggleMode(true)}
           >

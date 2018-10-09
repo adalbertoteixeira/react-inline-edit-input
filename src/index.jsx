@@ -87,7 +87,25 @@ class InlineEdit extends PureComponent {
     this.cancel = this.cancel.bind(this);
     this.save = this.save.bind(this);
     this.change = this.change.bind(this);
-    this.input = React.createRef();
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.inputRef = React.createRef();
+  }
+
+  /**
+   * If pressing Enter or Escape save and close or close.
+   * @param {ev} ev - on key down event
+   * @return {void}
+   */
+  handleKeyDown(ev) {
+    if (ev.key === 'Enter') {
+      this.save();
+      return;
+    }
+
+    if (ev.key === 'Escape') {
+      this.cancel();
+      return;
+    }
   }
 
   /**
@@ -124,7 +142,7 @@ class InlineEdit extends PureComponent {
    */
   toggleMode(edit) {
     this.setState({ edit }, () => {
-      if (edit && this.input.current) {
+     if (edit && this.inputRef && this.inputRef.current) {
         this.input.current.focus();
       }
     });
@@ -184,6 +202,8 @@ class InlineEdit extends PureComponent {
         {this.state.edit ?
           <div className="input-wrapper" style={styles.inputWrapper}>
             <Input
+              onKeyDownCapture={this.handleKeyDown}
+              ref={this.inputRef}
               style={styles.inputWrapperInput}
               type={this.props.type}
               value={this.state.value}

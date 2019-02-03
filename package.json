@@ -1,10 +1,10 @@
 {
   "name": "react-inline-edit-input",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rm -rf dist/ &&  mkdir dist/ && ./node_modules/.bin/babel --no-comments --compact true --minified --source-maps map src/index.jsx --out-file dist/index.js",
+    "build": "rm -rf dist/ &&  mkdir dist/ && npx  babel --no-comments --source-maps --compact true --minified src/index.jsx --out-file dist/index.js",
     "test": "jest"
   },
   "repository": {

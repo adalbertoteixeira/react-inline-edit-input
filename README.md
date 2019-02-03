@@ -18,4 +18,14 @@
 | :--- | :--- | :------ | :---------- |
 | updateOnNewProps | boolean | false | Props will only be updated if this is set to true |
 | format | function | null | Formats the value according to the function supplied |
-
+| value | string | '' | initial input value |
+| tag | string | 'span' | |
+| type | string |'text' | |
+| onSave | string | null | |
+| updateOnNewProps | string | false | |
+| saveColor | string | 'blue' | |
+| saveLabel | string | 'Save' | |
+| cancelColor | string | 'red' | |
+| cancelLabel | string | 'Cancel' | |
+| minDate | string | '' | |
+| maxDate | string | '' | |

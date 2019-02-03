@@ -18,6 +18,8 @@ test('InlineEdit mounts with default values', () => {
   expect(wrapper.prop('type')).toEqual('text');
   expect(wrapper.prop('onSave')).toBe(null);
   expect(wrapper.prop('updateOnNewProps')).toBe(false);
+  expect(wrapper.prop('min')).toEqual(undefined);
+  expect(wrapper.prop('max')).toEqual(undefined);
 });
 
 test('InlineEdit should start with the value displayed', () => {
@@ -136,11 +138,11 @@ test('InlineEdit should updated props if flag is set', () => {
       onSave={onSave}
     />
   );
-  
+
   expect(wrapper.state().value).toEqual('placeholder');
   const value = wrapper.find(tagCSS);
   value.simulate('click');
-  
+
   const input = wrapper.find(`${inputCSS} input`);
   input.simulate('change', { target: { value: 'newvalue' } });
   expect(wrapper.state().value).toEqual('newvalue');
@@ -149,4 +151,24 @@ test('InlineEdit should updated props if flag is set', () => {
   save.simulate('click');
   expect(wrapper.state().value).toEqual('newvalue');
   expect(onSave).toHaveBeenCalledWith('newvalue');
+});
+
+test('InlineEdit should min and max dates', () => {
+  const onSave = jest.fn();
+  const wrapper = mount(
+    <InlineEdit
+      onSave={onSave}
+      type="date"
+      value="2019-01-15"
+      minDate="2019-01-01"
+      maxDate="2019-01-31"
+    />
+  );
+
+  expect(wrapper.state().value).toEqual('2019-01-15');
+  const value = wrapper.find(tagCSS);
+  value.simulate('click');
+  const input = wrapper.find('input');
+  expect(input.props().min).toEqual('2019-01-01');
+  expect(input.props().max).toEqual('2019-01-31');
 });

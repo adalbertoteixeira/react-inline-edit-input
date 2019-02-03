@@ -188,6 +188,8 @@ class InlineEdit extends PureComponent {
       tag,
       type,
       format,
+      minDate,
+      maxDate,
     } = this.props;
 
     const {
@@ -196,6 +198,12 @@ class InlineEdit extends PureComponent {
 
     const Tag = tag;
     const Input = type === 'textarea' ? 'textarea' : 'input';
+    const additionalProps = {};
+
+    if (type === 'date') {
+      additionalProps.min = minDate;
+      additionalProps.max = maxDate;
+    }
 
     return (
       <div className="inline-edit" style={styles.inlineEdit}>
@@ -208,6 +216,7 @@ class InlineEdit extends PureComponent {
               type={this.props.type}
               value={this.state.value}
               onChange={this.change}
+              {...additionalProps}
             />
             <div className="actions" style={styles.inputWrapperActions}>
               <button
@@ -268,6 +277,8 @@ InlineEdit.defaultProps = {
   cancelColor: 'red',
   cancelLabel: 'Cancel',
   getValue: null,
+  minDate: '',
+  maxDate: '',
 };
 
 export default InlineEdit;
